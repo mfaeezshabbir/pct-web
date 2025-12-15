@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { siteConfig } from "@/config/site";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -24,13 +25,7 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Matches", href: "/matches" },
-    { name: "Players", href: "/players" },
-    { name: "Stats", href: "/stats" },
-    { name: "Shop", href: "/shop" },
-  ];
+  const navLinks = siteConfig.mainNav;
 
   return (
     <>

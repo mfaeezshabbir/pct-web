@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     "Official-inspired immersive web experience for the Pakistan Cricket Team.",
 };
 
+import Footer from "@/components/layout/Footer";
+
+// ... existing imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +33,10 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${inter.variable} antialiased bg-black text-white overflow-x-hidden`}
       >
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
