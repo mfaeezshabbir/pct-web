@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pakistan Cricket Board | The Shaheens",
+  title: "Pakistan Cricket Board",
   description:
     "Official-inspired immersive web experience for the Pakistan Cricket Board.",
   icons: {
@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${oswald.variable} ${inter.variable} antialiased overflow-x-hidden`}
       >

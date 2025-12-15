@@ -160,7 +160,7 @@ export default function MatchCenter() {
                     <div
                       key={i}
                       className={`w-[${
-                        Math.random() > 0.5 ? "2px" : "4px"
+                        i % 2 === 0 || i % 5 === 0 ? "2px" : "4px"
                       }] bg-foreground h-full inline-block`}
                     ></div>
                   ))}
