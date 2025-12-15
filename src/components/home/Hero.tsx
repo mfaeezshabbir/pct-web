@@ -1,108 +1,68 @@
 "use client";
-import React, { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import React from "react";
+import Image from "next/image"; // Removed unused Carousel imports
+import { Crown, Trophy, Activity } from "lucide-react";
+import heroBanner from "@/assets/hero_banner.webp";
 
 export default function Hero() {
-  const container = useRef(null);
-  const title = useRef(null);
-  const subtitle = useRef(null);
-  const circle = useRef(null);
-
-  useGSAP(
-    () => {
-      const tl = gsap.timeline();
-
-      tl.from(circle.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)",
-      })
-        .from(
-          title.current,
-          {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2, // If split text, but here it's one block
-            ease: "power4.out",
-          },
-          "-=1"
-        )
-        .from(
-          subtitle.current,
-          {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-          },
-          "-=0.5"
-        );
-
-      // Parallax effect on mouse move
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        const x = (clientX / window.innerWidth - 0.5) * 20;
-        const y = (clientY / window.innerHeight - 0.5) * 20;
-
-        gsap.to(title.current, { x: x, y: y, duration: 1, ease: "power2.out" });
-        gsap.to(circle.current, {
-          x: -x * 2,
-          y: -y * 2,
-          duration: 1,
-          ease: "power2.out",
-        });
-      };
-
-      window.addEventListener("mousemove", handleMouseMove);
-      return () => window.removeEventListener("mousemove", handleMouseMove);
-    },
-    { scope: container }
-  );
-
   return (
-    <section
-      ref={container}
-      className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-background"
-    >
-      {/* Background Gradient Circle */}
-      <div
-        ref={circle}
-        className="absolute w-[60vw] h-[60vw] bg-pct-green/20 rounded-full blur-[100px] -z-0 pointer-events-none"
-      ></div>
+    <section className="h-screen w-full relative overflow-hidden bg-background flex flex-col justify-end pb-12">
+      {/* FULL SCREEN HERO IMAGE */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={heroBanner}
+          alt="Pakistan Cricket Team"
+          fill
+          className="object-cover"
+          priority
+          placeholder="blur"
+        />
+        {/* Cinematic Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+      </div>
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] z-0"></div>
+      {/* BOTTOM STATS / FOOTER AREA */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+        {/* Left: Tagline */}
+        <div className="text-left">
+          <h3 className="text-muted-foreground text-sm uppercase tracking-widest mb-2 flex items-center gap-2">
+            <Activity size={14} className="text-pct-gold" /> Our Legacy
+          </h3>
+          <p className="text-xl md:text-3xl font-light text-white max-w-md leading-tight">
+            From <span className="text-white/60">Shooting Stars</span> To{" "}
+            <span className="text-pct-gold font-bold">World Champions</span>.
+          </p>
+        </div>
 
-      {/* Noise Texture via CSS */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-        style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")',
-        }}
-      ></div>
+        {/* Center: Crown Doodle */}
+        <div className="flex justify-center pb-2 opacity-80 hover:opacity-100 transition-opacity">
+          <Crown
+            size={64}
+            className="text-pct-gold drop-shadow-lg animate-pulse"
+            strokeWidth={1}
+          />
+        </div>
 
-      <h1
-        ref={title}
-        className="text-[12vw] md:text-[15vw] leading-[0.8] font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground tracking-tighter z-10 text-center select-none drop-shadow-2xl"
-      >
-        SHAHEENS
-      </h1>
-      <p
-        ref={subtitle}
-        className="mt-8 text-lg md:text-2xl text-pct-gold tracking-[0.5em] font-light z-10 uppercase"
-      >
-        Cornered Tigers • World Champions
-      </p>
-
-      <div className="absolute bottom-10 flex flex-col items-center gap-2 z-10 opacity-70">
-        <span className="text-xs uppercase tracking-widest text-muted-foreground">
-          Scroll
-        </span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-pct-gold to-transparent"></div>
+        {/* Right: Stats */}
+        <div className="flex justify-between md:justify-end gap-16 text-center md:text-right">
+          <div className="group cursor-pointer">
+            <h4 className="text-4xl md:text-6xl font-oswald font-bold text-white group-hover:text-pct-gold transition-colors">
+              1992
+            </h4>
+            <div className="text-xs text-white/60 uppercase tracking-widest mt-1">
+              World Cup
+            </div>
+          </div>
+          <div className="group cursor-pointer">
+            <h4 className="text-4xl md:text-6xl font-oswald font-bold text-white group-hover:text-pct-gold transition-colors">
+              No. 1
+            </h4>
+            <div className="text-xs text-white/60 uppercase tracking-widest mt-1">
+              ODI Ranking
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -5,10 +5,11 @@ import GlassCard from "@/components/ui/GlassCard";
 import { ArrowUpRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image"; // Added import
 
 export default function NewsSection() {
   useGSAP(() => {
+    // ... (keep existing GSAP code)
     gsap.from(".news-card", {
       scrollTrigger: {
         trigger: ".news-container",
@@ -45,12 +46,19 @@ export default function NewsSection() {
               i === 0 ? "lg:col-span-2" : ""
             }`}
           >
-            {/* Image Placeholder */}
-            <div className="absolute inset-0 bg-zinc-800 transition-transform duration-700 group-hover:scale-105">
+            {/* Image Background */}
+            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
               <div className="w-full h-full bg-[linear-gradient(to_top,black_0%,transparent_100%)] z-10 absolute inset-0"></div>
-              <div className="w-full h-full flex items-center justify-center text-white/10 font-oswald text-9xl font-bold uppercase">
-                News
-              </div>
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-zinc-800"></div>
+              )}
             </div>
 
             <div className="relative z-20 p-8">

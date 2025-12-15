@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${oswald.variable} ${inter.variable} antialiased overflow-x-hidden`}
+        className={`${inter.variable} ${oswald.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"
