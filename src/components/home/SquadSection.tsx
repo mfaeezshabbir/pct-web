@@ -6,6 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 export default function SquadSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -85,74 +86,65 @@ export default function SquadSection() {
         {players.map((player) => (
           <div
             key={player.id}
-            className="squad-card min-w-[300px] md:min-w-[350px] snap-center"
+            className="squad-card min-w-[300px] md:min-w-[350px] snap-center py-4"
           >
-            <GlassCard className="h-[500px] relative overflow-hidden group p-0 border-border hover:border-pct-gold/50 transition-colors duration-500">
-              {/* Background Gradient */}
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-pct-gold/20 cursor-pointer">
+              {/* Main Gradient Background */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${player.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+                className={`absolute inset-0 bg-gradient-to-br ${player.color} opacity-100 transition-all duration-500`}
               ></div>
 
-              {/* Image Placeholder - In real app, use Next Image */}
-              <div className="absolute inset-0 flex items-end justify-center mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-700">
-                {/* Placeholder for player image */}
+              {/* Texture/Noise Overlay */}
+              <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-soft-light"></div>
+
+              {/* Stadium Light Glow Effect */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-gradient-to-b from-white/30 to-transparent blur-3xl opacity-50"></div>
+
+              {/* Large Background Number */}
+              <div className="absolute top-2 left-4 z-10">
+                <span className="font-oswald font-bold text-[180px] leading-none text-white/10 select-none">
+                  {player.number}
+                </span>
               </div>
 
-              {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
-                <div className="flex justify-between items-start">
-                  <span className="text-6xl font-oswald font-bold text-foreground/5 group-hover:text-foreground/20 transition-colors duration-500">
-                    {player.number}
-                  </span>
-                  <div className="w-8 h-8 rounded-full border border-white/20 dark:border-white/20 border-black/20 flex items-center justify-center group-hover:bg-pct-gold group-hover:border-pct-gold group-hover:text-black transition-all duration-300 text-foreground">
-                    <ArrowRight
-                      size={14}
-                      className="-rotate-45 group-hover:rotate-0 transition-transform duration-300"
-                    />
-                  </div>
-                </div>
-
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-4xl font-oswald font-bold text-foreground uppercase leading-none mb-2">
-                    {player.name}
-                  </h3>
-                  <p className="text-pct-gold text-xs font-bold uppercase tracking-widest mb-6">
-                    {player.role}
-                  </p>
-
-                  <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    <div className="text-center">
-                      <div className="text-muted-foreground text-[10px] uppercase">
-                        Matches
-                      </div>
-                      <div className="text-foreground font-bold">
-                        {player.stats.matches}
-                      </div>
-                    </div>
-                    {player.stats.runs && (
-                      <div className="text-center">
-                        <div className="text-muted-foreground text-[10px] uppercase">
-                          Runs
-                        </div>
-                        <div className="text-foreground font-bold">
-                          {player.stats.runs}
-                        </div>
-                      </div>
-                    )}
-                    {player.stats.wickets && (
-                      <div className="text-center">
-                        <div className="text-muted-foreground text-[10px] uppercase">
-                          Wkts
-                        </div>
-                        <div className="text-foreground font-bold">
-                          {player.stats.wickets}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+              {/* Top Right Arrow */}
+              <div className="absolute top-6 right-6 z-30">
+                <div className="w-10 h-10 rounded-full border border-white/30 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
+                  <ArrowRight
+                    size={16}
+                    className="-rotate-45 group-hover:rotate-0 transition-transform duration-300"
+                  />
                 </div>
               </div>
-            </GlassCard>
+
+              {/* Player Image */}
+              <div className="absolute inset-x-0 bottom-0 h-[85%] z-20 transition-transform duration-700 group-hover:scale-105 origin-bottom">
+                {player.image && (
+                  <Image
+                    src={player.image}
+                    alt={player.name}
+                    fill
+                    className="object-contain object-bottom drop-shadow-2xl"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                  />
+                )}
+              </div>
+
+              {/* Bottom Info Gradient Overlay */}
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-30"></div>
+
+              {/* Player Info */}
+              <div className="absolute bottom-8 left-6 right-6 z-40 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="text-4xl font-oswald font-bold text-white uppercase leading-none mb-1 drop-shadow-lg">
+                  {player.name}
+                </h3>
+                <p className="text-pct-gold text-sm font-bold uppercase tracking-widest drop-shadow-md flex items-center gap-2">
+                  <span className="w-8 h-[2px] bg-pct-gold inline-block"></span>
+                  {player.role}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
 
