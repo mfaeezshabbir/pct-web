@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-6 md:px-20">
+    <main className="min-h-screen bg-background pt-32 pb-20 px-6 md:px-20">
       <div className="mb-16 text-center">
-        <h1 className="text-6xl md:text-8xl font-oswald font-bold text-white mb-6 uppercase tracking-tighter">
+        <h1 className="text-6xl md:text-8xl font-oswald font-bold text-foreground mb-6 uppercase tracking-tighter">
           Official <span className="text-pct-gold">Store</span>
         </h1>
-        <p className="text-white/60 text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           Wear the green with pride. Official merchandise of the Pakistan
           Cricket Team.
         </p>
@@ -28,9 +28,9 @@ export default function ShopPage() {
             key={product.id}
             className="group p-0 overflow-hidden relative"
           >
-            <div className="aspect-square bg-zinc-900 flex items-center justify-center relative">
+            <div className="aspect-square bg-muted/50 dark:bg-zinc-900 flex items-center justify-center relative">
               {/* Placeholder for Product Image */}
-              <div className="text-white/20 font-oswald text-6xl font-bold uppercase rotate-45 transform group-hover:scale-110 transition-transform duration-500">
+              <div className="text-muted-foreground/20 font-oswald text-6xl font-bold uppercase rotate-45 transform group-hover:scale-110 transition-transform duration-500">
                 {product.category}
               </div>
 
@@ -41,7 +41,7 @@ export default function ShopPage() {
 
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-bold font-oswald text-white uppercase leading-none">
+                <h3 className="text-lg font-bold font-oswald text-foreground uppercase leading-none">
                   {product.name}
                 </h3>
               </div>

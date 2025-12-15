@@ -65,7 +65,7 @@ export default function Hero() {
   return (
     <section
       ref={container}
-      className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-black"
+      className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-background"
     >
       {/* Background Gradient Circle */}
       <div
@@ -87,7 +87,7 @@ export default function Hero() {
 
       <h1
         ref={title}
-        className="text-[12vw] md:text-[15vw] leading-[0.8] font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 tracking-tighter z-10 text-center select-none drop-shadow-2xl"
+        className="text-[12vw] md:text-[15vw] leading-[0.8] font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground tracking-tighter z-10 text-center select-none drop-shadow-2xl"
       >
         SHAHEENS
       </h1>
@@ -99,7 +99,7 @@ export default function Hero() {
       </p>
 
       <div className="absolute bottom-10 flex flex-col items-center gap-2 z-10 opacity-70">
-        <span className="text-xs uppercase tracking-widest text-white/50">
+        <span className="text-xs uppercase tracking-widest text-muted-foreground">
           Scroll
         </span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-pct-gold to-transparent"></div>

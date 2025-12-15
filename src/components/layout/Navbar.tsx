@@ -10,6 +10,8 @@ import Image from "next/image";
 import pctLogo from "@/assets/Pakistan_cricket_team_logo.png";
 import { cn } from "@/lib/utils";
 
+import { ModeToggle } from "@/components/mode-toggle";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +50,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 transition-all duration-300",
           isScrolled
-            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3"
+            ? "bg-background/80 backdrop-blur-md border-b border-border py-3"
             : "bg-transparent py-6"
         )}
       >
@@ -58,7 +60,7 @@ export default function Navbar() {
             alt="PCB Logo"
             className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform duration-300"
           />
-          <span className="hidden md:block font-oswald font-bold text-xl tracking-tighter text-white">
+          <span className="hidden md:block font-oswald font-bold text-xl tracking-tighter text-foreground">
             PCB
           </span>
         </Link>
@@ -73,7 +75,7 @@ export default function Navbar() {
                 "text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative group",
                 pathname === link.href
                   ? "text-pct-gold"
-                  : "text-white/80 hover:text-white"
+                  : "text-foreground/80 hover:text-foreground"
               )}
             >
               {link.name}
@@ -85,25 +87,29 @@ export default function Navbar() {
               ></span>
             </Link>
           ))}
+          <ModeToggle />
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white hover:text-pct-gold transition-colors"
-        >
-          <Menu size={28} />
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <ModeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-foreground hover:text-pct-gold transition-colors"
+          >
+            <Menu size={28} />
+          </button>
+        </div>
       </nav>
 
       {/* Full Screen Mobile Menu */}
       <div
         ref={menuRef}
-        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 transform translate-x-full border-l border-white/10 flex flex-col justify-center items-center md:hidden"
+        className="fixed inset-0 bg-background/95 backdrop-blur-xl z-50 transform translate-x-full border-l border-border flex flex-col justify-center items-center md:hidden"
       >
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 text-white hover:text-pct-gold transition-colors"
+          className="absolute top-6 right-6 text-foreground hover:text-pct-gold transition-colors"
         >
           <X size={32} />
         </button>
@@ -117,7 +123,7 @@ export default function Navbar() {
                 if (el) linksRef.current[i] = el;
               }}
               className={cn(
-                "text-5xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 transition-all duration-300 uppercase",
+                "text-5xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground transition-all duration-300 uppercase",
                 pathname === link.href ? "to-pct-gold" : "hover:to-pct-gold"
               )}
               onClick={() => setIsOpen(false)}

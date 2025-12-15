@@ -23,15 +23,15 @@ export default function NewsSection() {
   });
 
   return (
-    <section className="py-20 px-6 md:px-20 bg-black flex flex-col news-container relative border-t border-white/10">
+    <section className="py-20 px-6 md:px-20 bg-background flex flex-col news-container relative border-t border-border">
       <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
         <div>
-          <h2 className="text-6xl md:text-7xl font-oswald text-white mb-2">
+          <h2 className="text-6xl md:text-7xl font-oswald text-foreground mb-2">
             LATEST <span className="text-pct-gold">NEWS</span>
           </h2>
           <div className="h-1 w-20 bg-pct-green"></div>
         </div>
-        <button className="group flex items-center gap-2 text-white hover:text-pct-gold transition-colors uppercase tracking-widest text-sm font-bold">
+        <button className="group flex items-center gap-2 text-foreground hover:text-pct-gold transition-colors uppercase tracking-widest text-sm font-bold">
           View All News{" "}
           <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
         </button>
@@ -57,7 +57,7 @@ export default function NewsSection() {
               <span className="text-pct-gold text-xs font-bold uppercase tracking-widest mb-2 block">
                 {item.category}
               </span>
-              <h3 className="text-3xl font-oswald font-bold leading-tight mb-4 group-hover:text-pct-gold transition-colors">
+              <h3 className="text-3xl font-oswald font-bold leading-tight mb-4 text-white group-hover:text-pct-gold transition-colors">
                 {item.title}
               </h3>
               <p className="text-white/70 line-clamp-2 md:line-clamp-3 font-light mb-6">

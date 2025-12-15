@@ -6,18 +6,18 @@ import { Twitter, Instagram, Facebook, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-zinc-950 border-t border-white/10 pt-20 pb-10 px-6 md:px-20 overflow-hidden relative">
+    <footer className="w-full bg-background border-t border-border pt-20 pb-10 px-6 md:px-20 overflow-hidden relative">
       {/* Background Text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-oswald font-bold text-white/5 select-none pointer-events-none whitespace-nowrap">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-oswald font-bold text-foreground/5 select-none pointer-events-none whitespace-nowrap">
         PAKISTAN
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 max-w-7xl mx-auto">
         <div className="col-span-1 md:col-span-2">
-          <h2 className="text-4xl font-oswald mb-6 text-white uppercase tracking-tighter">
+          <h2 className="text-4xl font-oswald mb-6 text-foreground uppercase tracking-tighter">
             {siteConfig.name}
           </h2>
-          <p className="text-white/60 mb-8 max-w-md font-light">
+          <p className="text-muted-foreground mb-8 max-w-md font-light">
             {siteConfig.description}
           </p>
           <div className="flex gap-4">
@@ -49,7 +49,7 @@ export default function Footer() {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="text-white/60 hover:text-white transition-colors uppercase text-sm tracking-wider"
+                  className="text-muted-foreground hover:text-foreground transition-colors uppercase text-sm tracking-wider"
                 >
                   {item.name}
                 </Link>
@@ -62,12 +62,12 @@ export default function Footer() {
           <h3 className="text-lg font-bold uppercase tracking-widest text-pct-gold mb-6">
             Contact
           </h3>
-          <ul className="space-y-4 text-white/60 text-sm font-light">
+          <ul className="space-y-4 text-muted-foreground text-sm font-light">
             <li>{siteConfig.contact.address}</li>
             <li>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="hover:text-white transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {siteConfig.contact.email}
               </a>
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30 uppercase tracking-widest">
+      <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
         <p>&copy; {new Date().getFullYear()} PCB. All Rights Reserved.</p>
         <p>Designed with Passion.</p>
       </div>
@@ -90,7 +90,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-pct-gold hover:border-pct-gold hover:bg-white/5 transition-all duration-300"
+      className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-pct-gold hover:border-pct-gold hover:bg-muted transition-all duration-300"
     >
       {icon}
     </a>

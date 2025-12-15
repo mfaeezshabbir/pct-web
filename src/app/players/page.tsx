@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PlayersPage() {
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-6 md:px-20">
+    <main className="min-h-screen bg-background pt-32 pb-20 px-6 md:px-20">
       <PlayersList />
     </main>
   );

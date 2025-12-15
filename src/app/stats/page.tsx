@@ -32,9 +32,9 @@ export default function StatsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-6 md:px-20">
+    <main className="min-h-screen bg-background pt-32 pb-20 px-6 md:px-20">
       <div className="mb-16">
-        <h1 className="text-6xl md:text-8xl font-oswald font-bold text-white mb-2 uppercase tracking-tighter">
+        <h1 className="text-6xl md:text-8xl font-oswald font-bold text-foreground mb-2 uppercase tracking-tighter">
           Statistics
         </h1>
         <div className="h-1 w-32 bg-pct-gold"></div>
@@ -46,10 +46,10 @@ export default function StatsPage() {
             <div className="absolute top-0 right-0 p-4 opacity-20 transform scale-150 group-hover:scale-125 transition-transform duration-500">
               {stat.icon}
             </div>
-            <h3 className="text-white/60 text-sm uppercase tracking-widest mb-4">
+            <h3 className="text-muted-foreground text-sm uppercase tracking-widest mb-4">
               {stat.title}
             </h3>
-            <div className="text-5xl md:text-7xl font-oswald font-bold text-white mb-2">
+            <div className="text-5xl md:text-7xl font-oswald font-bold text-foreground mb-2">
               {stat.value}
             </div>
             <div className="text-pct-gold font-bold uppercase tracking-wide">
@@ -60,14 +60,14 @@ export default function StatsPage() {
       </div>
 
       <GlassCard className="p-10 text-center">
-        <h2 className="text-3xl font-oswald text-white mb-4">
+        <h2 className="text-3xl font-oswald text-foreground mb-4">
           FULL STATS ARCHIVE
         </h2>
-        <p className="text-white/50 mb-8 max-w-xl mx-auto">
+        <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
           Detailed career statistics and historical records are being compiled.
           Access the full database soon.
         </p>
-        <button className="px-8 py-3 rounded-full border border-white/20 text-white/50 hover:text-white hover:bg-white/10 transition-colors uppercase text-xs font-bold tracking-widest">
+        <button className="px-8 py-3 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors uppercase text-xs font-bold tracking-widest">
           Coming Soon
         </button>
       </GlassCard>
