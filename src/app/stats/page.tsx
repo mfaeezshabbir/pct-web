@@ -4,9 +4,9 @@ import { TrendingUp, Award, BarChart3 } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Stats & Records | Pakistan Cricket Team",
+  title: "Stats & Records | Pakistan Cricket Board",
   description:
-    "Top performers and cricketing records of the Pakistan Cricket Team.",
+    "Top performers and cricketing records of the Pakistan Cricket Board.",
 };
 
 export default function StatsPage() {

@@ -5,7 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Official Store | Pakistan Cricket Team",
+  title: "Official Store | Pakistan Cricket Board",
   description: "Buy official PCT merchandise, jerseys, and accessories.",
 };
 

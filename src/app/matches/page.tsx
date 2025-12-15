@@ -5,9 +5,9 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fixtures & Results | Pakistan Cricket Team",
+  title: "Fixtures & Results | Pakistan Cricket Board",
   description:
-    "Upcoming matches, results, and schedule for the Pakistan Cricket Team.",
+    "Upcoming matches, results, and schedule for the Pakistan Cricket Board.",
 };
 
 export default function MatchesPage() {

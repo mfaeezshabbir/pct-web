@@ -55,7 +55,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <Image
             src={pctLogo}
-            alt="PCT Logo"
+            alt="PCB Logo"
             className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform duration-300"
           />
           <span className="hidden md:block font-oswald font-bold text-xl tracking-tighter text-white">

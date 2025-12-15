@@ -3,7 +3,7 @@ import PlayersList from "@/components/pages/PlayersList";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "The Squad | Pakistan Cricket Team",
+  title: "The Squad | Pakistan Cricket Board",
   description: "Meet the Shaheens. Full squad list and player profiles.",
 };
 

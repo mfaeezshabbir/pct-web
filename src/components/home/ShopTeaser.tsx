@@ -15,7 +15,7 @@ export default function ShopTeaser() {
           WEAR THE <span className="text-pct-gold">PASSION</span>
         </h2>
         <p className="text-xl text-white/80 font-light mb-10 max-w-2xl mx-auto">
-          Get your hands on the official Pakistan Cricket Team jersey. Be part
+          Get your hands on the official Pakistan Cricket Board jersey. Be part
           of the legacy.
         </p>
 

@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pakistan Cricket Team | The Shaheens",
+  title: "Pakistan Cricket Board | The Shaheens",
   description:
-    "Official-inspired immersive web experience for the Pakistan Cricket Team.",
+    "Official-inspired immersive web experience for the Pakistan Cricket Board.",
   icons: {
     icon: pctLogo.src,
   },
