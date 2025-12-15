@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,15 +7,54 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
-  menTeamRankings,
-  menPlayerRankings,
-  womenTeamRankings,
-  womenPlayerRankings,
+  menTeamRankings as fallbackMenTeam,
+  menPlayerRankings as fallbackMenPlayers,
+  womenTeamRankings as fallbackWomenTeam,
+  womenPlayerRankings as fallbackWomenPlayers,
 } from "@/data/rankings";
 import { Trophy, TrendingUp, User } from "lucide-react";
 
 export default function RankingsFooter() {
   const AUTOPLAY_DELAY = 4000;
+
+  const [data, setData] = useState({
+    menTeam: fallbackMenTeam,
+    menPlayers: fallbackMenPlayers,
+    womenTeam: fallbackWomenTeam,
+    womenPlayers: fallbackWomenPlayers,
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch("/api/rankings");
+        if (res.ok) {
+          const json = await res.json();
+          // Validate we received arrays before setting
+          if (json.menTeam?.length) {
+            setData({
+              menTeam: json.menTeam,
+              menPlayers: json.menPlayers?.length
+                ? json.menPlayers
+                : fallbackMenPlayers,
+              womenTeam: json.womenTeam?.length
+                ? json.womenTeam
+                : fallbackWomenTeam,
+              womenPlayers: json.womenPlayers?.length
+                ? json.womenPlayers
+                : fallbackWomenPlayers,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch live rankings", e);
+      }
+    };
+    getData();
+  }, []);
+
+  const { menTeam, menPlayers, womenTeam, womenPlayers } = data;
+
   return (
     <div className="relative z-20 w-full border-t border-white/10 bg-black/90 backdrop-blur-md">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/10">
@@ -37,7 +76,7 @@ export default function RankingsFooter() {
               className="w-full mt-auto"
             >
               <CarouselContent>
-                {menTeamRankings.map((item, index) => (
+                {menTeam.map((item, index) => (
                   <CarouselItem key={index}>
                     <div className="flex flex-col">
                       <span className="text-5xl font-oswald font-bold text-white">
@@ -75,7 +114,7 @@ export default function RankingsFooter() {
               className="w-full mt-auto"
             >
               <CarouselContent>
-                {menPlayerRankings.map((p, i) => (
+                {menPlayers.map((p, i) => (
                   <CarouselItem key={i}>
                     <div className="flex flex-col">
                       <div className="flex items-start leading-none mb-1">
@@ -120,7 +159,7 @@ export default function RankingsFooter() {
               className="w-full mt-auto"
             >
               <CarouselContent>
-                {womenTeamRankings.map((item, index) => (
+                {womenTeam.map((item, index) => (
                   <CarouselItem key={index}>
                     <div className="flex flex-col">
                       <div className="flex items-start leading-none">
@@ -159,7 +198,7 @@ export default function RankingsFooter() {
               className="w-full mt-auto"
             >
               <CarouselContent>
-                {womenPlayerRankings.map((p, i) => (
+                {womenPlayers.map((p, i) => (
                   <CarouselItem key={i}>
                     <div className="flex flex-col">
                       <div className="flex items-start leading-none mb-1">

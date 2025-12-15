@@ -15,11 +15,6 @@ export default function Home() {
       <MatchCenter />
       <SquadSection />
       <ShopTeaser />
-      <section className="h-[50vh] w-full flex items-center justify-center bg-background border-t border-border">
-        <h2 className="text-sm text-muted-foreground font-oswald tracking-widest">
-          © 2024 PAKISTAN CRICKET TEAM
-        </h2>
-      </section>
     </main>
   );
 }
