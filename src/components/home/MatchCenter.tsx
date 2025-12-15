@@ -43,93 +43,118 @@ export default function MatchCenter() {
 
       <div className="z-10 flex flex-col gap-8">
         {/* FEATURED MATCH CARD */}
-        <GlassCard className="featured-match w-full p-8 md:p-12 relative overflow-hidden group border-pct-gold/20">
-          <div
-            className={`absolute inset-0 bg-gradient-to-r from-pct-green/10 to-transparent opacity-50`}
-          ></div>
-          <div className="absolute top-0 right-0 p-32 bg-pct-gold/5 rounded-full blur-3xl"></div>
+        <div className="featured-match w-full relative group">
+          {/* Ticket Layout Container */}
+          <div className="relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/10 shadow-2xl flex flex-col md:flex-row min-h-[400px]">
+            {/* Graphics / Left Side */}
+            <div className="relative w-full md:w-2/3 p-8 md:p-12 flex flex-col justify-between overflow-hidden">
+              {/* Dynamic Background Image - Placeholder for now */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pct-green/90 to-black z-10 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 z-10 pointer-events-none"></div>
+              {/* Abstract shapes */}
+              <div className="absolute -top-20 -left-20 w-[400px] h-[400px] bg-pct-gold/20 rounded-full blur-[100px] z-0"></div>
 
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-            {/* Status Badge */}
-            <div className="absolute top-0 left-0">
-              <span
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-br-2xl ${
-                  featuredMatch.status === "completed"
-                    ? "bg-pct-green text-white"
-                    : featuredMatch.status === "live"
-                    ? "bg-red-600 text-white animate-pulse"
-                    : "bg-white text-black"
-                }`}
-              >
-                {featuredMatch.status === "live"
-                  ? "LIVE NOW"
-                  : featuredMatch.status}
-              </span>
-            </div>
-
-            {/* Teams Large View */}
-            <div className="flex items-center gap-8 md:gap-20 w-full justify-center md:justify-start">
-              <div className="text-center group-hover:scale-110 transition-transform duration-500">
-                <div className="text-6xl md:text-8xl mb-4">🇵🇰</div>
-                <span className="font-bold text-2xl md:text-4xl font-oswald tracking-tighter">
-                  PAK
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-6xl font-oswald text-white/20 font-bold italic">
-                  VS
-                </span>
-                <span className="text-pct-gold text-xs font-bold uppercase tracking-widest mt-2">
-                  {featuredMatch.series}
-                </span>
-              </div>
-
-              <div className="text-center group-hover:scale-110 transition-transform duration-500">
-                <div className="text-6xl md:text-8xl mb-4">
-                  {featuredMatch.opponentFlag}
-                </div>
-                <span className="font-bold text-2xl md:text-4xl font-oswald tracking-tighter uppercase">
-                  {featuredMatch.opponent.substring(0, 3)}
-                </span>
-              </div>
-            </div>
-
-            {/* Details & Action */}
-            <div className="flex flex-col items-center md:items-end gap-6 min-w-[300px] text-center md:text-right border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-10">
-              <div>
-                <div className="text-2xl font-oswald font-bold text-white mb-2">
-                  {featuredMatch.venue}
-                </div>
-                <div className="flex items-center gap-4 text-white/60 text-sm justify-center md:justify-end">
-                  <span className="flex items-center gap-2">
-                    <Calendar size={14} className="text-pct-gold" />{" "}
-                    {featuredMatch.date}
+              {/* Header */}
+              <div className="relative z-20 flex justify-between items-start">
+                <div className="flex flex-col">
+                  <span className="text-pct-gold font-bold tracking-[0.2em] text-xs uppercase mb-1">
+                    {featuredMatch.series}
                   </span>
-                  <span className="flex items-center gap-2">
-                    <Clock size={14} className="text-pct-gold" />{" "}
-                    {featuredMatch.time}
+                  <span className="text-white/80 text-sm font-light flex items-center gap-2">
+                    <MapPin size={12} className="text-pct-gold" />{" "}
+                    {featuredMatch.venue}
                   </span>
                 </div>
+                <div
+                  className={`px-4 py-2 rounded-full border border-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-widest ${
+                    featuredMatch.status === "live"
+                      ? "bg-red-600 border-red-500 animate-pulse text-white"
+                      : "bg-white/10 text-white"
+                  }`}
+                >
+                  {featuredMatch.status === "live"
+                    ? "● LIVE"
+                    : featuredMatch.status}
+                </div>
+              </div>
+
+              {/* Main Matchup */}
+              {/* Main Matchup */}
+              <div className="relative z-20 flex flex-col md:flex-row items-center gap-8 md:gap-16 my-8 md:my-0">
+                <div className="text-center transform group-hover:-translate-y-2 transition-transform duration-500 z-10">
+                  <div className="text-6xl md:text-8xl mb-2 relative">🇵🇰</div>
+                  <div className="text-2xl font-oswald font-bold text-white tracking-widest relative">
+                    PAKISTAN
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center z-10">
+                  <span className="text-4xl font-oswald text-pct-gold italic font-bold">
+                    VS
+                  </span>
+                  <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/50 to-transparent my-2"></div>
+                </div>
+
+                <div className="text-center transform group-hover:-translate-y-2 transition-transform duration-500 z-10">
+                  <div className="text-6xl md:text-8xl mb-2 relative">
+                    {featuredMatch.opponentFlag}
+                  </div>
+                  <div className="text-2xl font-oswald font-bold text-white tracking-widest uppercase relative">
+                    {featuredMatch.opponent}
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer Info */}
+              <div className="relative z-20">
+                <div className="flex items-center gap-6 text-sm text-white/60 font-mono">
+                  <span className="flex items-center gap-2">
+                    <Calendar size={14} /> {featuredMatch.date}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Clock size={14} /> {featuredMatch.time}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Ticket Stub / Actions - Right Side */}
+            <div className="relative w-full md:w-1/3 bg-white/5 backdrop-blur-xl border-l border-white/10 p-8 flex flex-col justify-center items-center text-center">
+              {/* Perforated Line Effect */}
+              <div className="absolute left-0 top-0 bottom-0 w-[2px] border-l-2 border-dashed border-white/20 -ml-[1px] hidden md:block"></div>
+
+              {/* Cutout circles for ticket effect */}
+              <div className="absolute -top-3 -left-3 w-6 h-6 bg-zinc-950 rounded-full hidden md:block"></div>
+              <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-zinc-950 rounded-full hidden md:block"></div>
+
+              <div className="mb-6">
+                <h3 className="text-pct-gold font-oswald text-xl mb-2">
+                  MATCH DAY
+                </h3>
+                <p className="text-xs text-white/40 max-w-[200px] mx-auto">
+                  Purchase online to secure your seat at the stadium.
+                </p>
               </div>
 
               {featuredMatch.result ? (
-                <div className="text-3xl font-oswald font-bold text-pct-gold animate-pulse">
-                  {featuredMatch.result}
+                <div className="py-4 px-6 bg-pct-green/20 border border-pct-green/50 rounded-lg">
+                  <p className="text-pct-green font-bold uppercase tracking-widest text-sm">
+                    {featuredMatch.result}
+                  </p>
                 </div>
               ) : (
-                <div className="flex gap-4">
-                  <button className="px-8 py-3 bg-white text-black font-bold uppercase text-sm tracking-widest hover:bg-pct-gold transition-colors rounded-full">
-                    Match Center
-                  </button>
-                  <button className="px-8 py-3 bg-transparent border border-white/20 text-white font-bold uppercase text-sm tracking-widest hover:bg-white/10 transition-colors rounded-full">
+                <div className="flex flex-col gap-3 w-full max-w-[200px]">
+                  <button className="w-full py-3 bg-pct-gold text-black font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors rounded">
                     Buy Tickets
+                  </button>
+                  <button className="w-full py-3 bg-transparent border border-white/20 text-white font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-colors rounded">
+                    Match Data
                   </button>
                 </div>
               )}
             </div>
           </div>
-        </GlassCard>
+        </div>
 
         {/* OTHER MATCHES - Horizontal Scroll or Grid */}
         <div className="other-matches-list grid grid-cols-1 md:grid-cols-3 gap-6">

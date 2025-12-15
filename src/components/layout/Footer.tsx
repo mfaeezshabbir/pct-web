@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <footer className="w-full bg-zinc-950 border-t border-white/10 pt-20 pb-10 px-6 md:px-20 overflow-hidden relative">
       {/* Background Text */}
-      <div className="absolute -top-20 -left-20 text-[20vw] font-oswald font-bold text-white/5 select-none pointer-events-none whitespace-nowrap">
-        PAKISTAN CRICKET
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-oswald font-bold text-white/5 select-none pointer-events-none whitespace-nowrap">
+        PAKISTAN
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 max-w-7xl mx-auto">

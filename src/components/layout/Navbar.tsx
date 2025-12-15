@@ -1,18 +1,30 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { siteConfig } from "@/config/site";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import pctLogo from "@/assets/Pakistan_cricket_team_logo.png";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const navRef = useRef(null);
   const menuRef = useRef(null);
   const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useGSAP(() => {
     if (isOpen) {
@@ -33,28 +45,61 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 w-full p-6 flex justify-between items-center z-50 mix-blend-difference text-white"
+        className={cn(
+          "fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3"
+            : "bg-transparent py-6"
+        )}
       >
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-3 group">
           <Image
             src={pctLogo}
             alt="PCT Logo"
-            className="w-12 h-12 md:w-16 md:h-16 object-contain"
+            className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform duration-300"
           />
+          <span className="hidden md:block font-oswald font-bold text-xl tracking-tighter text-white">
+            PCB
+          </span>
         </Link>
 
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={cn(
+                "text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative group",
+                pathname === link.href
+                  ? "text-pct-gold"
+                  : "text-white/80 hover:text-white"
+              )}
+            >
+              {link.name}
+              <span
+                className={cn(
+                  "absolute -bottom-1 left-0 w-full h-[2px] bg-pct-gold transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                  pathname === link.href && "scale-x-100"
+                )}
+              ></span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="hover:text-pct-gold transition-colors"
+          className="md:hidden text-white hover:text-pct-gold transition-colors"
         >
-          <Menu size={32} />
+          <Menu size={28} />
         </button>
       </nav>
 
-      {/* Full Screen Menu */}
+      {/* Full Screen Mobile Menu */}
       <div
         ref={menuRef}
-        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 transform translate-x-full border-l border-white/10 flex flex-col justify-center items-center"
+        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 transform translate-x-full border-l border-white/10 flex flex-col justify-center items-center md:hidden"
       >
         <button
           onClick={() => setIsOpen(false)}
@@ -71,7 +116,10 @@ export default function Navbar() {
               ref={(el) => {
                 if (el) linksRef.current[i] = el;
               }}
-              className="text-5xl md:text-7xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 hover:to-pct-gold transition-all duration-300 uppercase"
+              className={cn(
+                "text-5xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 transition-all duration-300 uppercase",
+                pathname === link.href ? "to-pct-gold" : "hover:to-pct-gold"
+              )}
               onClick={() => setIsOpen(false)}
             >
               {link.name}

@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
 import SquadSection from "@/components/home/SquadSection";
 import MatchCenter from "@/components/home/MatchCenter";
@@ -9,7 +8,6 @@ import ShopTeaser from "@/components/home/ShopTeaser";
 export default function Home() {
   return (
     <main className="min-h-screen bg-black">
-      <Navbar />
       <Hero />
       <SquadSection />
       <MatchCenter />

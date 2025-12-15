@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 
 export default function RootLayout({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${oswald.variable} ${inter.variable} antialiased bg-black text-white overflow-x-hidden`}
       >
         <SmoothScroll>
+          <Navbar />
           {children}
           <Footer />
         </SmoothScroll>
