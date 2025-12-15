@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import pctLogo from "@/assets/Pakistan_cricket_team_logo.png";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -17,11 +18,12 @@ export const metadata: Metadata = {
   title: "Pakistan Cricket Team | The Shaheens",
   description:
     "Official-inspired immersive web experience for the Pakistan Cricket Team.",
+  icons: {
+    icon: pctLogo.src,
+  },
 };
 
 import Footer from "@/components/layout/Footer";
-
-// ... existing imports
 
 export default function RootLayout({
   children,
