@@ -2,6 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Trophy, Users, Shield, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { StaticImageData } from "next/image";
+
+import menTest from "@/assets/team/MTEST.png";
+import menODI from "@/assets/team/MODI.png";
+import menT20 from "@/assets/team/MT20.png";
+import womenODI from "@/assets/team/WODI.png";
+import womenT20 from "@/assets/team/WT20.png";
 
 // Define the comprehensive structure we expect from the API now
 interface RankingItem {
@@ -140,59 +147,69 @@ export default function RankingsFooter() {
     );
   };
 
+  // Image Assets Mapping
+  const TEAM_IMAGES = {
+    menTest,
+    menODI,
+    menT20,
+    womenODI,
+    womenT20,
+  };
+
   // Render a team card
   const TeamRankCard = ({
     item,
     title,
+    image,
   }: {
     item: RankingItem | null;
     title: string;
+    image?: string | StaticImageData;
   }) => {
     const rank = item?.rank || "-";
     const points = item?.points || 0;
 
     return (
-      <div className="col-span-1 md:col-span-3 relative bg-pct-green dark:bg-gradient-to-br dark:from-pct-gold/20 dark:to-black rounded-2xl p-6 md:p-10 flex items-center justify-between overflow-hidden shadow-lg group">
-        {/* Texture/Noise */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
-
-        {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center h-full">
-          <span className="text-xs font-bold text-white/70 dark:text-pct-gold uppercase tracking-[0.2em] mb-2">
+      <div className="col-span-1 md:col-span-3 h-64 relative bg-pct-green dark:bg-gradient-to-br dark:from-pct-green/20 dark:to-black/50 rounded-2xl p-6 md:px-12 flex items-center justify-between overflow-visible shadow-2xl group border border-white/10">
+        {/* Left Content: Title & Name */}
+        <div className="relative z-10 flex flex-col justify-center h-full w-1/3">
+          <span className="text-xs font-bold text-pct-gold uppercase tracking-[0.2em] mb-2">
             {title}
           </span>
           <h3 className="text-5xl md:text-7xl font-oswald font-bold text-white italic tracking-tight mb-4">
             PAKISTAN
           </h3>
-          <div className="inline-flex items-center bg-white/20 dark:bg-pct-gold/10 backdrop-blur-md rounded-full px-4 py-1.5 w-fit">
-            <span className="text-xs font-bold text-white dark:text-pct-gold">
+          <div className="inline-flex items-center bg-black/20 backdrop-blur-md rounded-full px-4 py-1.5 w-fit border border-white/10">
+            <span className="text-xs font-bold text-white">
               {points} Rating Points
             </span>
           </div>
         </div>
 
-        {/* Rank Badge */}
-        <div className="relative z-10">
-          <div className="w-24 h-28 md:w-32 md:h-36 relative flex flex-col items-center justify-center">
-            <div
-              className="absolute inset-0 bg-black/20"
-              style={{
-                clipPath:
-                  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-              }}
-            ></div>
-            <span className="text-xs text-white/60 uppercase font-bold tracking-widest relative z-10 mb-1">
+        {/* Center Image: Pop-out Trio */}
+        {image && (
+          <div className="absolute inset-x-0 bottom-0 top-[-20%] md:top-[-40%] z-20 pointer-events-none flex justify-center items-end overflow-visible">
+            <div className="relative h-full w-full max-w-lg">
+              <img
+                src={typeof image === "string" ? image : image.src}
+                alt="Team Trio"
+                className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Right Content: Big Rank */}
+        <div className="relative z-10 flex flex-col items-end justify-center h-full w-1/3">
+          {/* Rank Box */}
+          <div className="relative z-10 bg-black/20 backdrop-blur-sm rounded-2xl w-28 h-28 md:w-32 md:h-32 flex flex-col items-center justify-center border border-white/10 shadow-xl">
+            <span className="text-[10px] text-white/80 uppercase font-bold tracking-[0.2em] mb-1">
               Rank
             </span>
-            <span className="text-5xl md:text-6xl font-oswald font-bold text-white relative z-10 leading-none">
+            <span className="text-5xl md:text-6xl font-oswald font-bold text-white leading-none">
               {rank}
             </span>
           </div>
-        </div>
-
-        {/* Decorative Icon */}
-        <div className="absolute -right-4 -bottom-4 text-white/5 dark:text-pct-gold/5 transform rotate-[-15deg]">
-          <Shield size={240} />
         </div>
       </div>
     );
@@ -224,7 +241,7 @@ export default function RankingsFooter() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={cn(
-                  "px-8 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300",
+                  "px-8 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 relative z-10",
                   activeTab === tab
                     ? "bg-pct-green text-white shadow-md dark:bg-pct-gold dark:text-black"
                     : "text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white"
@@ -237,9 +254,9 @@ export default function RankingsFooter() {
         </div>
 
         {/* Content Grid - Vertical Stack now */}
-        <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="space-y-24 animate-in fade-in slide-in-from-bottom-4 duration-500 mt-12">
           {/* MEN'S SECTION */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center gap-4">
               <span className="p-1.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-white/50">
                 <Users size={14} />
@@ -250,9 +267,16 @@ export default function RankingsFooter() {
               <div className="h-px bg-gray-200 dark:bg-white/10 grow"></div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-12">
               <TeamRankCard
                 item={currentData?.men.team || null}
+                image={
+                  activeTab === "test"
+                    ? TEAM_IMAGES.menTest
+                    : activeTab === "odi"
+                    ? TEAM_IMAGES.menODI
+                    : TEAM_IMAGES.menT20
+                }
                 title="Team Ranking"
               />
 
@@ -276,7 +300,7 @@ export default function RankingsFooter() {
           {/* WOMEN'S SECTION */}
           {/* No test rankings for womens */}
           {activeTab !== "test" && (
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="flex items-center gap-4">
                 <span className="p-1.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-white/50">
                   <Users size={14} />
@@ -287,9 +311,14 @@ export default function RankingsFooter() {
                 <div className="h-px bg-gray-200 dark:bg-white/10 grow"></div>
               </div>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-12">
                 <TeamRankCard
                   item={currentData?.women.team || null}
+                  image={
+                    activeTab === "odi"
+                      ? TEAM_IMAGES.womenODI
+                      : TEAM_IMAGES.womenT20
+                  }
                   title="Team Ranking"
                 />
 
