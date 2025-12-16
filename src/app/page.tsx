@@ -6,6 +6,7 @@ import MatchCenter from "@/components/home/MatchCenter";
 import NewsSection from "@/components/home/NewsSection";
 import ShopTeaser from "@/components/home/ShopTeaser";
 import HighlightsSection from "@/components/home/HighlightsSection";
+import CommercialPartners from "@/components/home/CommercialPartners";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <MatchCenter />
       <SquadSection />
       <ShopTeaser />
+      <CommercialPartners />
     </main>
   );
 }

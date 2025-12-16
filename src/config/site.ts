@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Pakistan Cricket Boardd",
+  name: "Pakistan Cricket Board",
   description:
     "Official-inspired immersive web experience for the Pakistan Cricket Board.",
   mainNav: [
