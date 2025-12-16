@@ -13,9 +13,9 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <Hero />
       <RankingsFooter />
-      <HighlightsSection />
       <NewsSection />
       <MatchCenter />
+      <HighlightsSection />
       <SquadSection />
       <ShopTeaser />
       <CommercialPartners />
