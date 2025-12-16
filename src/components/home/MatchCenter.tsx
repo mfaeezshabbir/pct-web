@@ -26,12 +26,13 @@ export default function MatchCenter() {
 
       <div className="mb-12 z-10 flex flex-col md:flex-row justify-between items-end gap-6">
         <div>
-          <h2 className="text-6xl md:text-8xl font-oswald text-transparent bg-clip-text bg-gradient-to-r from-pct-green to-pct-gold mb-4">
-            MATCH CENTER
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold text-pct-green dark:text-pct-gold uppercase tracking-tight mb-6">
+            Match Center
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl font-light tracking-wide max-w-2xl">
+          <p className="text-muted-foreground text-lg md:text-xl font-light tracking-wide max-w-2xl mb-8">
             Stay updated with the latest fixtures and results of the Shaheens.
           </p>
+          <div className="h-1 w-20 bg-[#E31E24] rounded-full"></div>
         </div>
         <Link
           href="/matches"

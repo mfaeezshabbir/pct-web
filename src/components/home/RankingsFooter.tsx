@@ -40,7 +40,7 @@ interface RankingsDataTree {
 }
 
 export default function RankingsFooter() {
-  const [activeTab, setActiveTab] = useState<"test" | "odi" | "t20">("odi");
+  const [activeTab, setActiveTab] = useState<"test" | "odi" | "t20">("t20");
   const [data, setData] = useState<RankingsDataTree | null>(null);
   const [loading, setLoading] = useState(true);
 

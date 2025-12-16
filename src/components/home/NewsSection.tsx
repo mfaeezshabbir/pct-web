@@ -27,10 +27,10 @@ export default function NewsSection() {
     <section className="py-20 px-6 md:px-20 bg-background flex flex-col news-container relative border-t border-border">
       <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
         <div>
-          <h2 className="text-6xl md:text-7xl font-oswald text-foreground mb-2">
-            LATEST <span className="text-pct-gold">NEWS</span>
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold text-pct-green dark:text-pct-gold uppercase tracking-tight mb-6">
+            Latest News
           </h2>
-          <div className="h-1 w-20 bg-pct-green"></div>
+          <div className="h-1 w-20 bg-[#E31E24] rounded-full"></div>
         </div>
         <button className="group flex items-center gap-2 text-foreground hover:text-pct-gold transition-colors uppercase tracking-widest text-sm font-bold">
           View All News{" "}

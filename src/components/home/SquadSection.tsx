@@ -53,12 +53,13 @@ export default function SquadSection() {
 
       <div className="px-6 md:px-20 mb-12 flex flex-col md:flex-row justify-between items-end gap-6 z-10">
         <div>
-          <h2 className="text-6xl md:text-8xl font-oswald text-foreground squad-title">
-            <span className="text-pct-green">THE</span> SQUAD
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold text-pct-green dark:text-pct-gold uppercase tracking-tight mb-6 squad-title">
+            The Squad
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-md">
+          <p className="text-muted-foreground mt-4 max-w-md mb-8">
             Meet the Shaheens representing Pakistan on the world stage.
           </p>
+          <div className="h-1 w-20 bg-[#E31E24] rounded-full"></div>
         </div>
 
         <div className="flex gap-4">

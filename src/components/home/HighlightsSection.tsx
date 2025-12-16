@@ -45,10 +45,10 @@ export default function HighlightsSection() {
       <div className="container mx-auto px-6">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <h2 className="text-4xl md:text-5xl font-oswald text-white uppercase mb-2">
-              Match <span className="text-pct-gold">Highlights</span>
+            <h2 className="text-4xl md:text-5xl font-oswald font-bold text-pct-green dark:text-pct-gold uppercase tracking-tight mb-6">
+              Match Highlights
             </h2>
-            <div className="h-1 w-20 bg-pct-green"></div>
+            <div className="h-1 w-20 bg-[#E31E24] rounded-full"></div>
           </div>
           <button className="text-sm font-bold text-white/60 hover:text-pct-gold transition-colors uppercase tracking-widest">
             View All Videos

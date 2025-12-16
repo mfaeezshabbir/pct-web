@@ -49,9 +49,9 @@ export default function Navbar() {
         ref={navRef}
         className={cn(
           "fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border py-3"
-            : "bg-transparent py-6"
+          // isScrolled ?
+          "bg-background/80 backdrop-blur-md border-b border-border py-3"
+          // : "bg-transparent py-6"
         )}
       >
         <Link href="/" className="flex items-center gap-3 group">
@@ -74,14 +74,14 @@ export default function Navbar() {
               className={cn(
                 "text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative group",
                 pathname === link.href
-                  ? "text-pct-gold"
+                  ? "text-pct-green dark:text-pct-gold"
                   : "text-foreground/80 hover:text-foreground"
               )}
             >
               {link.name}
               <span
                 className={cn(
-                  "absolute -bottom-1 left-0 w-full h-[2px] bg-pct-gold transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                  "absolute -bottom-1 left-0 w-full h-[2px] bg-pct-green dark:bg-pct-gold transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 group-hover:origin-left",
                   pathname === link.href && "scale-x-100"
                 )}
               ></span>
@@ -95,7 +95,7 @@ export default function Navbar() {
           <ModeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-foreground hover:text-pct-gold transition-colors"
+            className="text-foreground hover:text-pct-green dark:hover:text-pct-gold transition-colors"
           >
             <Menu size={28} />
           </button>
@@ -109,7 +109,7 @@ export default function Navbar() {
       >
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 text-foreground hover:text-pct-gold transition-colors"
+          className="absolute top-6 right-6 text-foreground hover:text-pct-green dark:hover:text-pct-gold transition-colors"
         >
           <X size={32} />
         </button>
@@ -123,8 +123,10 @@ export default function Navbar() {
                 if (el) linksRef.current[i] = el;
               }}
               className={cn(
-                "text-5xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground transition-all duration-300 uppercase",
-                pathname === link.href ? "to-pct-gold" : "hover:to-pct-gold"
+                "text-5xl font-oswald font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground transition-all duration-300 uppercase dark:bg-gradient-to-b dark:from-foreground dark:to-muted-foreground",
+                pathname === link.href
+                  ? "to-pct-green dark:to-pct-gold"
+                  : "hover:to-pct-green dark:hover:to-pct-gold"
               )}
               onClick={() => setIsOpen(false)}
             >
