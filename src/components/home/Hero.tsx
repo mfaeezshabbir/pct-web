@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image"; // Removed unused Carousel imports
 import { Crown, Trophy, Activity } from "lucide-react";
 import heroBanner from "@/assets/hero_banner.webp";
-import RankingsFooter from "./RankingsFooter";
 
 export default function Hero() {
   return (
@@ -22,8 +21,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
-
-      <RankingsFooter />
     </section>
   );
 }

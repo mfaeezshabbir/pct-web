@@ -1,24 +1,37 @@
 import axios from "axios";
 import https from "https";
 
-// Types matching our UI needs
+// --- Types ---
 export interface RankingItem {
-  format?: string;
   rank?: number;
-  category?: string;
-  player?: string;
-  points?: number;
+  player?: string; // or team name
   country?: string;
-  resolvedRank?: number;
+  points?: number;
+  category?: string; // BAT, BOWL, ALL
 }
 
-export interface RankingsData {
-  menTeam: RankingItem[];
-  womenTeam: RankingItem[];
-  menPlayers: RankingItem[];
-  womenPlayers: RankingItem[];
+export interface FormatData {
+  men: {
+    team: RankingItem | null;
+    batting: RankingItem | null;
+    bowling: RankingItem | null;
+    allrounder: RankingItem | null;
+  };
+  women: {
+    team: RankingItem | null;
+    batting: RankingItem | null;
+    bowling: RankingItem | null;
+    allrounder: RankingItem | null;
+  };
 }
 
+export interface RankingsDataTree {
+  test: FormatData;
+  odi: FormatData;
+  t20: FormatData;
+}
+
+// --- Config ---
 const CLIENT_ID = "tPZJbRgIub3Vua93/DWtyQ==";
 const BASE_URL = "https://assets-icc.sportz.io/cricket/v1/ranking";
 const agent = new https.Agent({ family: 4 });
@@ -42,6 +55,7 @@ const COMP_TYPE_MAP: Record<string, Record<string, string>> = {
   },
 };
 
+// --- Helpers ---
 async function fetchFromApi(params: Record<string, string>) {
   try {
     const { data } = await axios.get(BASE_URL, {
@@ -56,7 +70,6 @@ async function fetchFromApi(params: Record<string, string>) {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
       },
       httpsAgent: agent,
-      // Short timeout to fail fast
       timeout: 5000,
     });
     return data?.data?.["bat-rank"]?.rank || [];
@@ -70,7 +83,7 @@ async function getTeamRank(
   gender: "men" | "women",
   format: "test" | "odi" | "t20"
 ): Promise<RankingItem | null> {
-  const comp_type = COMP_TYPE_MAP[gender][format];
+  const comp_type = COMP_TYPE_MAP[gender]?.[format];
   if (!comp_type) return null;
 
   const ranks = await fetchFromApi({
@@ -78,7 +91,6 @@ async function getTeamRank(
     comp_type,
   });
 
-  // Find Pakistan
   const pak = ranks.find(
     (r: any) =>
       r.team_name === "Pakistan" ||
@@ -88,8 +100,8 @@ async function getTeamRank(
 
   if (pak) {
     return {
-      format: format.toUpperCase(),
       rank: parseInt(pak.no, 10),
+      player: "Pakistan", // Using 'player' field to store name for generic usage
       points: parseInt(pak.Points, 10),
       country: "Pakistan",
     };
@@ -102,33 +114,25 @@ async function getPlayerRank(
   category: "batting" | "bowling" | "allrounder",
   format: "test" | "odi" | "t20"
 ): Promise<RankingItem | null> {
-  const comp_type = COMP_TYPE_MAP[gender][format];
+  const comp_type = COMP_TYPE_MAP[gender]?.[format];
   if (!comp_type) return null;
 
-  const type_param = TYPE_MAP[category];
-
   const ranks = await fetchFromApi({
-    type: type_param, // e.g. 'bat', 'bowl'
+    type: TYPE_MAP[category],
     comp_type,
   });
 
-  // Iterate to handle "=" in rank
   let lastRank = 0;
   let pakPlayer = null;
 
   for (const r of ranks) {
     let rankVal = parseInt(r.no, 10);
     if (isNaN(rankVal)) {
-      // If it's "=", it shares the last rank
       rankVal = lastRank;
     } else {
       lastRank = rankVal;
     }
 
-    // Update the object with resolved rank for easier usage
-    r.resolvedRank = rankVal;
-
-    // Check if Pakistan
     const isPak =
       r.Country === "Pakistan" ||
       r.Country === "PAK" ||
@@ -137,61 +141,62 @@ async function getPlayerRank(
       (r.country_name && r.country_name.includes("Pakistan"));
 
     if (isPak) {
-      pakPlayer = r;
-      break; // Found the top one
+      pakPlayer = { ...r, resolvedRank: rankVal };
+      break;
     }
   }
 
   if (pakPlayer) {
-    let catDisplayName = "BAT";
-    if (category === "bowling") catDisplayName = "BOWL";
-    if (category === "allrounder") catDisplayName = "ALL";
-
     return {
-      category: catDisplayName,
+      rank: pakPlayer.resolvedRank,
       player:
         pakPlayer["Player-name"] || pakPlayer.player_name || pakPlayer.name,
-      rank: pakPlayer.resolvedRank,
       country: "Pakistan",
+      category: category.toUpperCase(),
     };
   }
   return null;
 }
 
-export async function fetchRankings(): Promise<RankingsData> {
-  // Use Promise.all to fetch everything in parallel for performance
-  const [
-    menTest,
-    menOdi,
-    menT20,
-    womenOdi,
-    womenT20,
-    menBat,
-    menBowl,
-    menAll,
-    womenBat,
-    womenBowl,
-    womenAll,
-  ] = await Promise.all([
-    getTeamRank("men", "test"),
-    getTeamRank("men", "odi"),
-    getTeamRank("men", "t20"),
-    getTeamRank("women", "odi"),
-    getTeamRank("women", "t20"),
-    getPlayerRank("men", "batting", "test"),
-    getPlayerRank("men", "bowling", "t20"),
-    getPlayerRank("men", "allrounder", "odi"),
-    getPlayerRank("women", "batting", "odi"),
-    getPlayerRank("women", "bowling", "t20"),
-    getPlayerRank("women", "allrounder", "t20"),
+// --- Main Fetch ---
+export async function fetchRankings(): Promise<RankingsDataTree> {
+  // We need data for ALL combinations.
+  // We'll organize specific functions to fetch a full "FormatData" block.
+
+  const fetchFormatData = async (
+    format: "test" | "odi" | "t20"
+  ): Promise<FormatData> => {
+    // Men
+    const [mTeam, mBat, mBowl, mAll] = await Promise.all([
+      getTeamRank("men", format),
+      getPlayerRank("men", "batting", format),
+      getPlayerRank("men", "bowling", format),
+      getPlayerRank("men", "allrounder", format),
+    ]);
+
+    // Women (Note: Test often missing for women in API, handle nulls)
+    const [wTeam, wBat, wBowl, wAll] = await Promise.all([
+      getTeamRank("women", format),
+      getPlayerRank("women", "batting", format),
+      getPlayerRank("women", "bowling", format),
+      getPlayerRank("women", "allrounder", format),
+    ]);
+
+    return {
+      men: { team: mTeam, batting: mBat, bowling: mBowl, allrounder: mAll },
+      women: { team: wTeam, batting: wBat, bowling: wBowl, allrounder: wAll },
+    };
+  };
+
+  const [testData, odiData, t20Data] = await Promise.all([
+    fetchFormatData("test"),
+    fetchFormatData("odi"),
+    fetchFormatData("t20"),
   ]);
 
   return {
-    menTeam: [menTest, menOdi, menT20].filter((i): i is RankingItem => !!i),
-    womenTeam: [womenOdi, womenT20].filter((i): i is RankingItem => !!i),
-    menPlayers: [menBat, menBowl, menAll].filter((i): i is RankingItem => !!i),
-    womenPlayers: [womenBat, womenBowl, womenAll].filter(
-      (i): i is RankingItem => !!i
-    ),
+    test: testData,
+    odi: odiData,
+    t20: t20Data,
   };
 }
