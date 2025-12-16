@@ -16,28 +16,26 @@ const highlights = [
     title: "Shaheen's 5-Wicket Haul vs Australia",
     duration: "10:24",
     image:
-      "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e9c1?q=80&w=800",
+      "https://www.geosuper.tv/assets/uploads/updates/2023-10-21/29160_7020148_updates.jpg",
   },
   {
     id: 2,
     title: "Babar Azam Century Highlights",
     duration: "15:30",
     image:
-      "https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800",
+      "https://img1.hscicdn.com/image/upload/f_auto,t_ds_wide_w_800,q_50/lsci/db/PICTURES/CMS/409200/409287.6.jpg",
   },
   {
     id: 3,
     title: "Final Over Thriller! Pakistan Wins by 1 Run",
     duration: "05:12",
-    image:
-      "https://images.unsplash.com/photo-1540747913346-6462d308q081?q=80&w=800",
+    image: "https://i.ytimg.com/vi/mvYK6SOdNSQ/maxresdefault.jpg",
   },
   {
     id: 4,
     title: "Best Fielding Moments of 2024",
     duration: "08:45",
-    image:
-      "https://images.unsplash.com/photo-1589487391730-58f20eb2c308?q=80&w=800",
+    image: "https://i.dawn.com/primary/2025/10/68f6a2a8240e2.jpg",
   },
 ];
 
