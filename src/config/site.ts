@@ -7,7 +7,7 @@ export const siteConfig = {
     { name: "Matches", href: "/matches" },
     { name: "Players", href: "/players" },
     { name: "Stats", href: "/stats" },
-    { name: "Shop", href: "/shop" },
+    { name: "Shop", href: "https://shop.pcb.com.pk/" },
   ],
   links: {
     twitter: "https://twitter.com/TheRealPCB",

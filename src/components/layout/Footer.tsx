@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
           {/* LATEST */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-green dark:text-pct-gold mb-6">
               Latest
             </h3>
             <ul className="space-y-0">
@@ -66,7 +66,7 @@ export default function Footer() {
 
           {/* MULTIMEDIA */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-green dark:text-pct-gold mb-6">
               Multimedia
             </h3>
             <ul className="space-y-0">
@@ -85,7 +85,7 @@ export default function Footer() {
 
           {/* PCB ADS */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-green dark:text-pct-gold mb-6">
               PCB Ads
             </h3>
             <ul className="space-y-0">
@@ -109,7 +109,7 @@ export default function Footer() {
 
           {/* ABOUT PCB */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-green dark:text-pct-gold mb-6">
               About PCB
             </h3>
             <ul className="space-y-0">
@@ -172,7 +172,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-pct-gold hover:border-pct-gold hover:bg-muted transition-all duration-300"
+      className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-pct-green hover:border-pct-green dark:hover:text-pct-gold dark:hover:border-pct-gold hover:bg-muted transition-all duration-300"
     >
       {icon}
     </a>

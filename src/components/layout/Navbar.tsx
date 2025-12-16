@@ -67,26 +67,37 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={cn(
-                "text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative group",
-                pathname === link.href
-                  ? "text-pct-green dark:text-pct-gold"
-                  : "text-foreground/80 hover:text-foreground"
-              )}
-            >
-              {link.name}
-              <span
+          {navLinks.map((link) =>
+            link.name === "Shop" ? (
+              <Link
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                className="px-6 py-2 rounded-full bg-pct-green text-white dark:bg-pct-gold dark:text-black text-sm font-bold uppercase tracking-widest hover:bg-pct-green/90 dark:hover:bg-pct-gold/90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
                 className={cn(
-                  "absolute -bottom-1 left-0 w-full h-[2px] bg-pct-green dark:bg-pct-gold transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 group-hover:origin-left",
-                  pathname === link.href && "scale-x-100"
+                  "text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative group",
+                  pathname === link.href
+                    ? "text-pct-green dark:text-pct-gold"
+                    : "text-foreground/80 hover:text-foreground"
                 )}
-              ></span>
-            </Link>
-          ))}
+              >
+                {link.name}
+                <span
+                  className={cn(
+                    "absolute -bottom-1 left-0 w-full h-[2px] bg-pct-green dark:bg-pct-gold transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                    pathname === link.href && "scale-x-100"
+                  )}
+                ></span>
+              </Link>
+            )
+          )}
           <ModeToggle />
         </div>
 

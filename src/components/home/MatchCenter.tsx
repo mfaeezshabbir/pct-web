@@ -36,7 +36,7 @@ export default function MatchCenter() {
         </div>
         <Link
           href="/matches"
-          className="text-pct-gold hover:text-foreground transition-colors uppercase tracking-widest text-sm font-bold flex items-center gap-2"
+          className="text-pct-green dark:text-pct-gold hover:text-foreground transition-colors uppercase tracking-widest text-sm font-bold flex items-center gap-2"
         >
           View All Fixtures <ArrowRight size={16} />
         </Link>
@@ -48,7 +48,7 @@ export default function MatchCenter() {
           {/* Ticket Layout Container */}
           <div className="relative overflow-hidden rounded-3xl bg-card border border-border shadow-2xl flex flex-col md:flex-row min-h-[400px]">
             {/* Graphics / Left Side */}
-            <div className="relative w-full md:w-2/3 p-8 md:p-12 flex flex-col justify-between overflow-hidden">
+            <div className="relative w-full md:w-2/3 p-6 md:p-12 flex flex-col justify-between overflow-hidden min-h-[350px]">
               {/* Dynamic Background Image - Placeholder for now */}
               <div className="absolute inset-0 bg-gradient-to-br from-pct-green/90 to-black z-10 mix-blend-multiply transition-colors dark:from-pct-green/90 dark:to-black"></div>
               <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 z-10 pointer-events-none"></div>
@@ -56,18 +56,18 @@ export default function MatchCenter() {
               <div className="absolute -top-20 -left-20 w-[400px] h-[400px] bg-pct-gold/20 rounded-full blur-[100px] z-0"></div>
 
               {/* Header */}
-              <div className="relative z-20 flex justify-between items-start">
+              <div className="relative z-20 flex justify-between items-start mb-6 md:mb-0">
                 <div className="flex flex-col">
-                  <span className="text-pct-gold font-bold tracking-[0.2em] text-xs uppercase mb-1">
+                  <span className="text-pct-gold font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase mb-1">
                     {featuredMatch.series}
                   </span>
-                  <span className="text-white/80 text-sm font-light flex items-center gap-2">
+                  <span className="text-white/80 text-xs md:text-sm font-light flex items-center gap-2">
                     <MapPin size={12} className="text-pct-gold" />{" "}
                     {featuredMatch.venue}
                   </span>
                 </div>
                 <div
-                  className={`px-4 py-2 rounded-full border border-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-widest ${
+                  className={`px-3 py-1 md:px-4 md:py-2 rounded-full border border-white/20 backdrop-blur-md text-[10px] md:text-xs font-bold uppercase tracking-widest ${
                     featuredMatch.status === "live"
                       ? "bg-red-600 border-red-500 animate-pulse text-white"
                       : "bg-white/10 text-white"
@@ -80,35 +80,33 @@ export default function MatchCenter() {
               </div>
 
               {/* Main Matchup */}
-              {/* Main Matchup */}
-              <div className="relative z-20 flex flex-col md:flex-row items-center gap-8 md:gap-16 my-8 md:my-0">
+              <div className="relative z-20 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 my-4 md:my-0 grow">
                 <div className="text-center transform group-hover:-translate-y-2 transition-transform duration-500 z-10">
-                  <div className="text-6xl md:text-8xl mb-2 relative">🇵🇰</div>
-                  <div className="text-2xl font-oswald font-bold text-white tracking-widest relative">
+                  <div className="text-5xl md:text-8xl mb-2 relative">🇵🇰</div>
+                  <div className="text-xl md:text-2xl font-oswald font-bold text-white tracking-widest relative">
                     PAKISTAN
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center z-10">
-                  <span className="text-4xl font-oswald text-pct-gold italic font-bold">
+                  <span className="text-2xl md:text-4xl font-oswald text-pct-gold italic font-bold">
                     VS
                   </span>
-                  <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/50 to-transparent my-2"></div>
                 </div>
 
                 <div className="text-center transform group-hover:-translate-y-2 transition-transform duration-500 z-10">
-                  <div className="text-6xl md:text-8xl mb-2 relative">
+                  <div className="text-5xl md:text-8xl mb-2 relative">
                     {featuredMatch.opponentFlag}
                   </div>
-                  <div className="text-2xl font-oswald font-bold text-white tracking-widest uppercase relative">
+                  <div className="text-xl md:text-2xl font-oswald font-bold text-white tracking-widest uppercase relative">
                     {featuredMatch.opponent}
                   </div>
                 </div>
               </div>
 
               {/* Footer Info */}
-              <div className="relative z-20">
-                <div className="flex items-center gap-6 text-sm text-white/60 font-mono">
+              <div className="relative z-20 mt-6 md:mt-0">
+                <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-sm text-white/60 font-mono">
                   <span className="flex items-center gap-2">
                     <Calendar size={14} /> {featuredMatch.date}
                   </span>
@@ -120,16 +118,23 @@ export default function MatchCenter() {
             </div>
 
             {/* Ticket Stub / Actions - Right Side */}
-            <div className="relative w-full md:w-1/3 bg-background/50 dark:bg-white/5 backdrop-blur-xl border-l border-border p-8 flex flex-col justify-center items-center text-center">
-              {/* Perforated Line Effect */}
+            <div className="relative w-full md:w-1/3 bg-background/50 dark:bg-white/5 backdrop-blur-xl border-t md:border-t-0 md:border-l border-border p-8 flex flex-col justify-center items-center text-center">
+              {/* Vertical Perforated Line (Desktop) */}
               <div className="absolute left-0 top-0 bottom-0 w-[2px] border-l-2 border-dashed border-border -ml-[1px] hidden md:block"></div>
 
-              {/* Cutout circles for ticket effect */}
+              {/* Horizontal Perforated Line (Mobile) */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] border-t-2 border-dashed border-border -mt-[1px] md:hidden"></div>
+
+              {/* Cutouts for Desktop (Vertical Line) */}
               <div className="absolute -top-3 -left-3 w-6 h-6 bg-background rounded-full hidden md:block shadow-inner border-b border-r border-border/50"></div>
               <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-background rounded-full hidden md:block shadow-inner border-t border-r border-border/50"></div>
 
+              {/* Cutouts for Mobile (Horizontal Line) */}
+              <div className="absolute -top-3 -left-3 w-6 h-6 bg-background rounded-full md:hidden shadow-inner border-b border-r border-border/50"></div>
+              <div className="absolute -top-3 -right-3 w-6 h-6 bg-background rounded-full md:hidden shadow-inner border-b border-l border-border/50"></div>
+
               <div className="mb-6">
-                <h3 className="text-pct-gold font-oswald text-xl mb-2">
+                <h3 className="text-pct-green dark:text-pct-gold font-oswald text-xl mb-2">
                   MATCH DAY
                 </h3>
                 <p className="text-xs text-muted-foreground max-w-[200px] mx-auto">
@@ -145,7 +150,7 @@ export default function MatchCenter() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-3 w-full max-w-[200px]">
-                  <button className="w-full py-3 bg-pct-gold text-black font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors rounded">
+                  <button className="w-full py-3 bg-pct-green text-white dark:bg-pct-gold dark:text-black font-bold uppercase text-xs tracking-widest hover:bg-pct-green/90 dark:hover:bg-white transition-colors rounded">
                     Buy Tickets
                   </button>
                   <button className="w-full py-3 bg-transparent border border-border text-foreground font-bold uppercase text-xs tracking-widest hover:bg-white/10 dark:hover:bg-white/10 hover:bg-black/5 transition-colors rounded">
@@ -194,7 +199,7 @@ export default function MatchCenter() {
                   className={`px-2 py-1 text-[10px] font-bold uppercase tracking-widest rounded ${
                     match.status === "completed"
                       ? "bg-muted text-muted-foreground"
-                      : "bg-pct-gold/20 text-pct-gold"
+                      : "bg-pct-green/10 text-pct-green dark:bg-pct-gold/20 dark:text-pct-gold"
                   }`}
                 >
                   {match.status}
@@ -222,11 +227,11 @@ export default function MatchCenter() {
                   {match.date}
                 </span>
                 {match.result ? (
-                  <span className="text-xs font-bold text-pct-gold">
+                  <span className="text-xs font-bold text-pct-green dark:text-pct-gold">
                     {match.result}
                   </span>
                 ) : (
-                  <span className="text-xs font-bold text-foreground hover:text-pct-gold transition-colors cursor-pointer">
+                  <span className="text-xs font-bold text-foreground hover:text-pct-green dark:hover:text-pct-gold transition-colors cursor-pointer">
                     Preview &rarr;
                   </span>
                 )}
