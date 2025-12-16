@@ -16,7 +16,7 @@ export const news: NewsItem[] = [
     date: "2025-01-02",
     category: "Team News",
     image:
-      "https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800&auto=format&fit=crop",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZH11tbttBdUrMxnanVqK_2kRY0P8vevvZRA&s",
   },
   {
     id: "n2",
@@ -25,8 +25,7 @@ export const news: NewsItem[] = [
       "The eagle strikes again! Shaheen becomes the fastest pacer to reach 100 ODI wickets during the clash against Australia.",
     date: "2024-11-09",
     category: "Records",
-    image:
-      "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e9c1?q=80&w=800&auto=format&fit=crop",
+    image: "https://i.brecorder.com/primary/2023/10/31151142a6a2d04.gif",
   },
   {
     id: "n3",
@@ -36,6 +35,6 @@ export const news: NewsItem[] = [
     date: "2024-12-20",
     category: "PCB",
     image:
-      "https://images.unsplash.com/photo-1540747913346-6462d308q081?q=80&w=800&auto=format&fit=crop",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTHeE8pFzAcf7xyWTAeQ9edBeHjLimQ9K0Q&s",
   },
 ];

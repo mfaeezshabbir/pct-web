@@ -1,4 +1,5 @@
 import axios from "axios";
+import https from "https";
 
 // Types matching our UI needs
 export interface RankingItem {
@@ -8,6 +9,7 @@ export interface RankingItem {
   player?: string;
   points?: number;
   country?: string;
+  resolvedRank?: number;
 }
 
 export interface RankingsData {
@@ -19,9 +21,9 @@ export interface RankingsData {
 
 const CLIENT_ID = "tPZJbRgIub3Vua93/DWtyQ==";
 const BASE_URL = "https://assets-icc.sportz.io/cricket/v1/ranking";
+const agent = new https.Agent({ family: 4 });
 
-// Map types for the API
-const TYPE_MAP = {
+const TYPE_MAP: Record<string, string> = {
   team: "team",
   batting: "bat",
   bowling: "bowl",
@@ -49,6 +51,11 @@ async function fetchFromApi(params: Record<string, string>) {
         lang: "en",
         ...params,
       },
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
+      httpsAgent: agent,
       // Short timeout to fail fast
       timeout: 5000,
     });
@@ -152,24 +159,32 @@ async function getPlayerRank(
 }
 
 export async function fetchRankings(): Promise<RankingsData> {
-  // Parallel fetching could be faster but let's be gentle with the API
-  const menTest = await getTeamRank("men", "test");
-  const menOdi = await getTeamRank("men", "odi");
-  const menT20 = await getTeamRank("men", "t20");
-
-  const womenOdi = await getTeamRank("women", "odi");
-  const womenT20 = await getTeamRank("women", "t20");
-
-  // Fetch top Pakistani players for specific formats/categories
-  // We'll pick a mix to show variety
-  const menBat = await getPlayerRank("men", "batting", "test"); // Babar usually high in ODI/T20, let's check Test too
-  // Actually usually users care about ODI/T20 more? Let's do one of each format
-  const menBowl = await getPlayerRank("men", "bowling", "t20");
-  const menAll = await getPlayerRank("men", "allrounder", "odi");
-
-  const womenBat = await getPlayerRank("women", "batting", "odi");
-  const womenBowl = await getPlayerRank("women", "bowling", "t20");
-  const womenAll = await getPlayerRank("women", "allrounder", "t20");
+  // Use Promise.all to fetch everything in parallel for performance
+  const [
+    menTest,
+    menOdi,
+    menT20,
+    womenOdi,
+    womenT20,
+    menBat,
+    menBowl,
+    menAll,
+    womenBat,
+    womenBowl,
+    womenAll,
+  ] = await Promise.all([
+    getTeamRank("men", "test"),
+    getTeamRank("men", "odi"),
+    getTeamRank("men", "t20"),
+    getTeamRank("women", "odi"),
+    getTeamRank("women", "t20"),
+    getPlayerRank("men", "batting", "test"),
+    getPlayerRank("men", "bowling", "t20"),
+    getPlayerRank("men", "allrounder", "odi"),
+    getPlayerRank("women", "batting", "odi"),
+    getPlayerRank("women", "bowling", "t20"),
+    getPlayerRank("women", "allrounder", "t20"),
+  ]);
 
   return {
     menTeam: [menTest, menOdi, menT20].filter((i): i is RankingItem => !!i),
