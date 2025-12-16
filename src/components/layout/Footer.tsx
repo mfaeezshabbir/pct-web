@@ -12,14 +12,17 @@ export default function Footer() {
         PAKISTAN
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 max-w-7xl mx-auto">
-        <div className="col-span-1 md:col-span-2">
-          <h2 className="text-4xl font-oswald mb-6 text-foreground uppercase tracking-tighter">
-            {siteConfig.name}
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-md font-light">
-            {siteConfig.description}
-          </p>
+      <div className="max-w-7xl mx-auto relative z-10 flex flex-col gap-16">
+        {/* Brand Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 border-b border-border pb-12">
+          <div className="max-w-md">
+            <h2 className="text-4xl font-oswald mb-6 text-foreground uppercase tracking-tighter">
+              {siteConfig.name}
+            </h2>
+            <p className="text-muted-foreground mb-8 font-light leading-relaxed">
+              {siteConfig.description}
+            </p>
+          </div>
           <div className="flex gap-4">
             <SocialLink
               href={siteConfig.links.twitter}
@@ -40,45 +43,124 @@ export default function Footer() {
           </div>
         </div>
 
-        <div>
-          <h3 className="text-lg font-bold uppercase tracking-widest text-pct-gold mb-6">
-            Explore
-          </h3>
-          <ul className="space-y-4">
-            {siteConfig.mainNav.map((item) => (
-              <li key={item.name}>
+        {/* Links Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
+          {/* LATEST */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+              Latest
+            </h3>
+            <ul className="space-y-0">
+              {["Media Release", "Match Reports", "Features"].map((item) => (
+                <li key={item} className="border-b border-border/50">
+                  <Link
+                    href="#"
+                    className="block py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* MULTIMEDIA */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+              Multimedia
+            </h3>
+            <ul className="space-y-0">
+              {["Podcast", "Photos", "Videos"].map((item) => (
+                <li key={item} className="border-b border-border/50">
+                  <Link
+                    href="#"
+                    className="block py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* PCB ADS */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+              PCB Ads
+            </h3>
+            <ul className="space-y-0">
+              {[
+                "Career Opportunity",
+                "Career Archives",
+                "Current Ad",
+                "Ad Archives",
+              ].map((item) => (
+                <li key={item} className="border-b border-border/50">
+                  <Link
+                    href="#"
+                    className="block py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ABOUT PCB */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-pct-gold mb-6">
+              About PCB
+            </h3>
+            <ul className="space-y-0">
+              <li className="border-b border-border/50">
                 <Link
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors uppercase text-sm tracking-wider"
+                  href="#"
+                  className="block py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {item.name}
+                  Contact Us
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold uppercase tracking-widest text-pct-gold mb-6">
-            Contact
-          </h3>
-          <ul className="space-y-4 text-muted-foreground text-sm font-light">
-            <li>{siteConfig.contact.address}</li>
-            <li>
-              <a
-                href={`mailto:${siteConfig.contact.email}`}
-                className="hover:text-foreground transition-colors"
-              >
-                {siteConfig.contact.email}
-              </a>
-            </li>
-          </ul>
+              <li className="border-b border-border/50">
+                <Link
+                  href="#"
+                  className="block py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  FAQs
+                </Link>
+              </li>
+              <li className="border-b border-border/50 py-3 flex items-center justify-between group cursor-pointer">
+                <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                  Media Account:
+                </span>
+                <XIconSquare />
+              </li>
+              <li className="border-b border-border/50 py-3 flex items-center justify-between group cursor-pointer">
+                <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                  Live Account:
+                </span>
+                <XIconSquare />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
         <p>&copy; {new Date().getFullYear()} PCB. All Rights Reserved.</p>
-        <p>Designed with Passion.</p>
+        <div className="flex gap-4">
+          <Link href="#" className="hover:text-foreground">
+            Disclaimer
+          </Link>
+          <span className="text-border">|</span>
+          <Link href="#" className="hover:text-foreground">
+            Terms & Conditions
+          </Link>
+          <span className="text-border">|</span>
+          <Link href="#" className="hover:text-foreground">
+            Privacy Statement
+          </Link>
+        </div>
       </div>
     </footer>
   );
@@ -94,5 +176,19 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
     >
       {icon}
     </a>
+  );
+}
+
+function XIconSquare() {
+  return (
+    <div className="w-6 h-6 bg-black flex items-center justify-center rounded-sm">
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="w-4 h-4 fill-white"
+      >
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zl-1.161 8.757l6.59-7.533H21.43l-8.77 10.033z"></path>
+      </svg>
+    </div>
   );
 }
